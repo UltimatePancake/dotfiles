@@ -32,7 +32,7 @@ Plugin 'luochen1990/rainbow'
 Plugin 'airblade/vim-gitgutter'
 
 " Themes
-Plugin 'chriskempson/base16-vim'
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
