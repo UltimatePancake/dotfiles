@@ -1,5 +1,5 @@
 " Force bash
-set shell=bash
+set shell=bash\ --login
 
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -30,6 +30,10 @@ Plugin 'andreshazard/vim-freemarker'
 Plugin 'tpope/vim-commentary'
 Plugin 'luochen1990/rainbow'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'majutsushi/tagbar'
+Plugin 'Yggdroot/indentLine'
+Plugin 'miyakogi/conoline.vim'
+Plugin 'dag/vim-fish'
 
 " Themes
 Plugin 'chriskempson/base16-vim'
@@ -64,17 +68,12 @@ set hidden
 
 " >>>EXTRAS
 set nowrap        " don't wrap lines
-set tabstop=4     " a tab is four spaces
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
 set autoindent    " always set autoindenting on
-set copyindent    " copy the previous indentation on autoindenting
-"set number        " always show line numbers
-set shiftwidth=4  " number of spaces to use for autoindenting
 set shiftround    " use multiple of shiftwidth when indenting with '<' and '>'
 set showmatch     " set show matching parenthesis
 set ignorecase    " ignore case when searching
 set smartcase     " ignore case if search pattern is all lowercase, case-sensitive otherwise
-set smarttab      " insert tabs on the start of a line according to shiftwidth, not tabstop
 set hlsearch      " highlight search terms
 set incsearch     " show search matches as you type
 
@@ -85,18 +84,26 @@ set title                " change the terminal's title
 set visualbell           " don't beep
 set noerrorbells         " don't beep
 
+" SOFT TABS! SOFT! WHAT PART OF THAT DO YOU NOT UNDERSTAND?
+set tabstop=4
+set softtabstop=0
+set expandtab
+set shiftwidth=4
+set smarttab
+
 " I HATE YOUR STUPID SWP FILES
 set nobackup
 set noswapfile
 
 " I HATE WHEN PEOPLE LEAVE WHITESPACE FOR NO REASON
 set list
-set listchars=tab:>.,trail:.,extends:#,nbsp:.
+set listchars=tab:>-,trail:.,extends:#,nbsp:.
 
+" PASTE MODE
 set pastetoggle=<F2>
 
 " SO WHAT IF I ENABLE THE MOUSE?!
-"set mouse=a
+set mouse=a
 
 " SCREW YOU, I'M LAZY
 nnoremap ; :
@@ -116,11 +123,10 @@ map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 
-nmap <silent> ,/ :nohlsearch<CR>
-
 " I SAID WRITE
 cmap w!! w !sudo tee % >/dev/null
 
+" INSTANT MODE CHANGE VISUALIZATION
 set ttimeoutlen=50
 
 " >>>PLUGIN EXTRAS
@@ -140,6 +146,8 @@ let g:airline_right_alt_sep = '▒'
 let g:airline_right_sep = '▒'
 let g:airline_left_alt_sep= '▒'
 let g:airline_left_sep = '▒'
+let g:airline#extensions#tabline#left_sep = '▒'
+let g:airline#extensions#tabline#left_alt_sep = '▒'
 
 " TAB SWITCHING MUHFUCKA!!
 nnoremap <C-q> :bprevious<CR>
@@ -174,3 +182,29 @@ map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
+
+" NUMBAAAAAHS
+set number
+set relativenumber
+
+" TAGBAR
+nmap <F8> :TagbarToggle<CR>
+
+" INDENT GUIDES
+let g:indentLine_enabled = 1
+let g:indentLine_char = '┆'
+
+" FOLDING!
+" set foldmethod=syntax
+" set foldcolumn=1
+
+" CONOLINE
+let g:conoline_auto_enable = 1
+let g:conoline_use_colorscheme_default_normal = 1
+let g:conoline_use_colorscheme_default_insert = 1
+
+" I SAID NOHL
+nnoremap <silent> <leader>h :noh<cr>
+
+" REMOVE ALL WHITESPACE WITH F5
+nnoremap <silent> <F5> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
