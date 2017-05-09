@@ -2,7 +2,11 @@
 
 import argparse, random, string
 
-parser = argparse.ArgumentParser()
+__author__ = 'Pier Gaetani'
+__version__ = '0.1'
+
+parser = argparse.ArgumentParser(
+    description = 'I\'ll make my own damn pwgen... with blackjack and hookers!')
 
 parser.add_argument('-l', '--length', type=int, help='Define generated password length (default: 12)')
 parser.add_argument('--no-uppercase', help='No uppercase characters', action='store_true')

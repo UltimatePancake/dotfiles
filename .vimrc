@@ -24,7 +24,7 @@ Plugin 'bling/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'PotatoesMaster/i3-vim-syntax'
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
 Plugin 'othree/xml.vim'
 Plugin 'andreshazard/vim-freemarker'
 Plugin 'tpope/vim-commentary'
@@ -34,6 +34,8 @@ Plugin 'majutsushi/tagbar'
 Plugin 'Yggdroot/indentLine'
 Plugin 'miyakogi/conoline.vim'
 Plugin 'dag/vim-fish'
+Plugin 'rodjek/vim-puppet'
+Plugin 'hashivim/vim-vagrant'
 
 " Themes
 
@@ -57,7 +59,6 @@ filetype plugin indent on    " required
 syntax on
 
 " COLORS MUHGHFUGHAAAAAAAA
-colorscheme gryffin
 set background=dark
 
 " Change leader key
@@ -103,7 +104,7 @@ set listchars=tab:>-,trail:.,extends:#,nbsp:.
 set pastetoggle=<F2>
 
 " SO WHAT IF I ENABLE THE MOUSE?!
-set mouse=a
+"set mouse=a
 
 " SCREW YOU, I'M LAZY
 nnoremap ; :
@@ -160,10 +161,10 @@ set autoread
 nnoremap <C-s> :write<CR>
 
 " ARE YOU SERIOUS LIFERAY?! ARE YOU SERIOUS?!?!
-let g:syntastic_java_javac_custom_classpath_command = "ant -q get-classpath | grep echo | cut -f2- -d] | tr -d ' ' | tr ':' '\n'"
+"let g:syntastic_java_javac_custom_classpath_command = "ant -q get-classpath | grep echo | cut -f2- -d] | tr -d ' ' | tr ':' '\n'"
 
 " YCM and Eclim playing nice now...
-let g:EclimCompletionMethod = 'omnifunc'
+"let g:EclimCompletionMethod = 'omnifunc'
 
 " WHAT DOES IT MEEEEEAN?!
 let g:rainbow_active = 1
@@ -208,3 +209,10 @@ nnoremap <silent> <leader>h :noh<cr>
 
 " REMOVE ALL WHITESPACE WITH F5
 nnoremap <silent> <F5> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
+
+" I SAID PYTHON 3 DAMMIT
+let g:ycm_server_python_interpreter = "/usr/bin/python"
+
+" NO YCM WHY
+let g:ycm_server_keep_logfiles = 1
+let g:ycm_server_log_level = 'debug'
