@@ -1,0 +1,17 @@
+rofi.font: gohu gohufont 9
+rofi.terminal: urxvt
+rofi.run-shell-command: {terminal} -e {cmd}
+rofi.modi: run,ssh,window
+rofi.opacity: 50
+rofi.fake-transparency: false
+rofi.hide-scrollbar: true
+
+rofi.sidebar-mode: true
+
+rofi.location: 8
+rofi.width: 16
+rofi.lines: 48
+rofi.line-margin: 1
+
+rofi.disable-history: true
+

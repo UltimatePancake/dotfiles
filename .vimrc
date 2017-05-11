@@ -24,16 +24,15 @@ Plugin 'bling/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'PotatoesMaster/i3-vim-syntax'
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'othree/xml.vim'
 Plugin 'andreshazard/vim-freemarker'
 Plugin 'tpope/vim-commentary'
 Plugin 'luochen1990/rainbow'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'majutsushi/tagbar'
-Plugin 'Yggdroot/indentLine'
 Plugin 'miyakogi/conoline.vim'
 Plugin 'dag/vim-fish'
+Plugin 'hashivim/vim-vagrant'
 
 " Themes
 
@@ -57,7 +56,6 @@ filetype plugin indent on    " required
 syntax on
 
 " COLORS MUHGHFUGHAAAAAAAA
-colorscheme gryffin
 set background=dark
 
 " Change leader key
@@ -103,7 +101,7 @@ set listchars=tab:>-,trail:.,extends:#,nbsp:.
 set pastetoggle=<F2>
 
 " SO WHAT IF I ENABLE THE MOUSE?!
-set mouse=a
+"set mouse=a
 
 " SCREW YOU, I'M LAZY
 nnoremap ; :
@@ -118,10 +116,10 @@ nnoremap j gj
 nnoremap k gk
 
 " Easy window navigation
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
+"map <C-h> <C-w>h
+"map <C-j> <C-w>j
+"map <C-k> <C-w>k
+"map <C-l> <C-w>l
 
 " I SAID WRITE
 cmap w!! w !sudo tee % >/dev/null
@@ -134,6 +132,16 @@ set ttimeoutlen=50
 map <C-n> :NERDTreeToggle<CR>
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+" SYNTASTIC PLS
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 " COLORS MUHFUCKA!
 set t_Co=256
@@ -152,6 +160,7 @@ let g:airline#extensions#tabline#left_alt_sep = '▒'
 " TAB SWITCHING MUHFUCKA!!
 nnoremap <C-q> :bprevious<CR>
 nnoremap <C-e> :bnext<CR>
+nnoremap <C-w> :bdelete<CR>
 
 " GOD DAMMIT I SAID READ THE DAMN INCOMING CHANGES!
 set autoread
@@ -160,7 +169,7 @@ set autoread
 nnoremap <C-s> :write<CR>
 
 " ARE YOU SERIOUS LIFERAY?! ARE YOU SERIOUS?!?!
-let g:syntastic_java_javac_custom_classpath_command = "ant -q get-classpath | grep echo | cut -f2- -d] | tr -d ' ' | tr ':' '\n'"
+"let g:syntastic_java_javac_custom_classpath_command = "ant -q get-classpath | grep echo | cut -f2- -d] | tr -d ' ' | tr ':' '\n'"
 
 " YCM and Eclim playing nice now...
 let g:EclimCompletionMethod = 'omnifunc'
@@ -208,3 +217,6 @@ nnoremap <silent> <leader>h :noh<cr>
 
 " REMOVE ALL WHITESPACE WITH F5
 nnoremap <silent> <F5> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
+
+" SCREW YOU JSON
+set conceallevel=0
