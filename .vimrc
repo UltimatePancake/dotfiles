@@ -24,6 +24,7 @@ Plugin 'bling/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'PotatoesMaster/i3-vim-syntax'
+"Plugin 'Valloric/YouCompleteMe'
 Plugin 'othree/xml.vim'
 Plugin 'andreshazard/vim-freemarker'
 Plugin 'tpope/vim-commentary'
@@ -32,6 +33,7 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'majutsushi/tagbar'
 Plugin 'miyakogi/conoline.vim'
 Plugin 'dag/vim-fish'
+Plugin 'rodjek/vim-puppet'
 Plugin 'hashivim/vim-vagrant'
 
 " Themes
@@ -172,7 +174,7 @@ nnoremap <C-s> :write<CR>
 "let g:syntastic_java_javac_custom_classpath_command = "ant -q get-classpath | grep echo | cut -f2- -d] | tr -d ' ' | tr ':' '\n'"
 
 " YCM and Eclim playing nice now...
-let g:EclimCompletionMethod = 'omnifunc'
+"let g:EclimCompletionMethod = 'omnifunc'
 
 " WHAT DOES IT MEEEEEAN?!
 let g:rainbow_active = 1
@@ -220,3 +222,10 @@ nnoremap <silent> <F5> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :noh
 
 " SCREW YOU JSON
 set conceallevel=0
+
+" I SAID PYTHON 3 DAMMIT
+let g:ycm_server_python_interpreter = "/usr/bin/python"
+
+" NO YCM WHY
+let g:ycm_server_keep_logfiles = 1
+let g:ycm_server_log_level = 'debug'

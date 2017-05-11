@@ -1,0 +1,39 @@
+#!/usr/bin/env python
+
+import argparse, random, string
+
+__author__ = 'Pier Gaetani'
+__version__ = '0.1'
+
+parser = argparse.ArgumentParser(
+    description = 'I\'ll make my own damn pwgen... with blackjack and hookers!')
+
+parser.add_argument('-l', '--length', type=int, help='Define generated password length (default: 12)')
+parser.add_argument('--no-uppercase', help='No uppercase characters', action='store_true')
+parser.add_argument('--no-lowercase', help='No lowercase characters', action='store_true')
+parser.add_argument('--no-digits', help='No numbers', action='store_true')
+parser.add_argument('--no-special', help='No special characters', action='store_true')
+
+args = parser.parse_args()
+
+charset = [string.ascii_uppercase, string.ascii_lowercase, string.digits, string.punctuation]
+
+if args.no_uppercase:
+    charset.remove(string.ascii_uppercase)
+if args.no_lowercase:
+    charset.remove(string.ascii_lowercase)
+if args.no_digits:
+    charset.remove(string.digits)
+if args.no_special:
+    charset.remove(string.punctuation)
+
+mix = ''.join(charset)
+
+pass_length = 12
+if args.length:
+    pass_length = args.length
+
+def pwgen(size=pass_length, chars=mix):
+    return ''.join(random.choice(chars) for _ in range(size))
+
+print(pwgen())
