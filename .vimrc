@@ -24,7 +24,7 @@ Plugin 'bling/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'PotatoesMaster/i3-vim-syntax'
-"Plugin 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'othree/xml.vim'
 Plugin 'andreshazard/vim-freemarker'
 Plugin 'tpope/vim-commentary'
@@ -35,6 +35,8 @@ Plugin 'miyakogi/conoline.vim'
 Plugin 'dag/vim-fish'
 Plugin 'rodjek/vim-puppet'
 Plugin 'hashivim/vim-vagrant'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'yuttie/comfortable-motion.vim'
 
 " Themes
 
@@ -58,6 +60,7 @@ filetype plugin indent on    " required
 syntax on
 
 " COLORS MUHGHFUGHAAAAAAAA
+"colorscheme badwolf
 set background=dark
 
 " Change leader key
@@ -118,10 +121,10 @@ nnoremap j gj
 nnoremap k gk
 
 " Easy window navigation
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
 
 " I SAID WRITE
 cmap w!! w !sudo tee % >/dev/null
@@ -134,6 +137,12 @@ set ttimeoutlen=50
 map <C-n> :NERDTreeToggle<CR>
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+" NERDCOMMENTS
+let g:NERDSpaceDelims = 1
+let g:NERDCompactSexyComs = 1
+let g:NERDDefaultAlign = 'left'
+let g:NERDTrimTrailingWhitespace = 1
 
 " SYNTASTIC PLS
 set statusline+=%#warningmsg#
@@ -189,10 +198,14 @@ set noshowmode
 nmap <F8> :TagbarToggle<CR>
 
 " PANE MOVEMENT
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" BETTER SPLITS
+set splitbelow
+set splitright
 
 " NUMBAAAAAHS
 set number
@@ -205,17 +218,11 @@ nmap <F8> :TagbarToggle<CR>
 let g:indentLine_enabled = 1
 let g:indentLine_char = '┆'
 
-" FOLDING!
-" set foldmethod=syntax
-" set foldcolumn=1
-
 " CONOLINE
 let g:conoline_auto_enable = 1
-let g:conoline_use_colorscheme_default_normal = 1
-let g:conoline_use_colorscheme_default_insert = 1
 
 " I SAID NOHL
-nnoremap <silent> <leader>h :noh<cr>
+nnoremap <leader><space> :nohlsearch<CR>
 
 " REMOVE ALL WHITESPACE WITH F5
 nnoremap <silent> <F5> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
@@ -227,5 +234,8 @@ set conceallevel=0
 let g:ycm_server_python_interpreter = "/usr/bin/python"
 
 " NO YCM WHY
-let g:ycm_server_keep_logfiles = 1
-let g:ycm_server_log_level = 'debug'
+"let g:ycm_server_keep_logfiles = 1
+"let g:ycm_server_log_level = 'debug'
+
+" still skeptical, trying this out
+imap jk <Esc>
