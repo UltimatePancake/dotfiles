@@ -1,2 +1,1 @@
-#include "colors/xresources/base16-bright-256.Xresources"
-!#include "colors/xresources/base16-greenscreen.Xresources"
+#include "colors/xresources/base16-solarized-dark-256.Xresources"

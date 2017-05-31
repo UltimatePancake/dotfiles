@@ -37,6 +37,9 @@ Plugin 'rodjek/vim-puppet'
 Plugin 'hashivim/vim-vagrant'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'yuttie/comfortable-motion.vim'
+"Plugin 'justinj/vim-pico8-syntax'
+Plugin 'SirVer/ultisnips'
+Plugin 'chrisbra/Colorizer'
 
 " Themes
 
@@ -160,7 +163,7 @@ set t_Co=256
 " AIRLINE
 set laststatus=2
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme='raven'
+let g:airline_theme='term'
 let g:airline_right_alt_sep = '▒'
 let g:airline_right_sep = '▒'
 let g:airline_left_alt_sep= '▒'
@@ -231,7 +234,7 @@ nnoremap <silent> <F5> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :noh
 set conceallevel=0
 
 " I SAID PYTHON 3 DAMMIT
-let g:ycm_server_python_interpreter = "/usr/bin/python"
+let g:ycm_server_python_interpreter = "/usr/bin/python3"
 
 " NO YCM WHY
 "let g:ycm_server_keep_logfiles = 1
@@ -239,3 +242,9 @@ let g:ycm_server_python_interpreter = "/usr/bin/python"
 
 " still skeptical, trying this out
 imap jk <Esc>
+
+" Pico launch
+"command Pico :silent ! /home/pancake/.local/bin/pico8 -run %
+
+" Colorizer
+let g:colorizer_auto_color = 1

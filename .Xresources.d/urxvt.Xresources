@@ -9,8 +9,7 @@ URxvt*font: -misc-gohup-medium-r-normal--11-80-100-100-c-60-iso10646-1
 URxvt*boldFont: -misc-gohup-bold-r-normal--11-80-100-100-c-60-iso10646-1
 URxvt*italicFont: -misc-gohup-bold-r-normal--11-80-100-100-c-60-iso10646-1
 
-URxvt*transparent: true
-URxvt*shading: 5
-
-URxvt.perl-ext:
-URxvt.perl-ext-common:
+URxvt*borderless: 1
+URxvt.urlLauncher: chromium
+URxvt.perl-ext-common: default,matcher
+URxvt.matcher.button: 1
