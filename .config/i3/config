@@ -27,54 +27,11 @@ set $mod Mod4
 # font, it doesn’t scale on retina/hidpi displays.
 font -misc-gohup-medium-r-normal--11-80-100-100-c-60-iso10646-1
 
-# Colors
-#set $base00 #000000
-#set $base01 #303030
-#set $base02 #505050
-#set $base03 #b0b0b0
-#set $base04 #d0d0d0
-#set $base05 #e0e0e0
-#set $base06 #f5f5f5
-#set $base07 #ffffff
-#set $base08 #fb0120
-#set $base09 #fc6d24
-#set $base0A #fda331
-#set $base0B #a1c659
-#set $base0C #76c7b7
-#set $base0D #6fb3d2
-#set $base0E #d381c3
-#set $base0F #be643c
-set_from_resource $base00 i3wm.color0 #000000
-set_from_resource $base01 i3wm.color18 #303030
-set_from_resource $base02 i3wm.color19 #505050
-set_from_resource $base03 i3wm.color8 #b0b0b0
-set_from_resource $base04 i3wm.color20 #d0d0d0
-set_from_resource $base05 i3wm.color7 #e0e0e0
-set_from_resource $base06 i3wm.color21 #f5f5f5
-set_from_resource $base07 i3wm.color15 #ffffff
-set_from_resource $base08 i3wm.color9 #fb0120
-set_from_resource $base09 i3wm.color16 #fc6d24
-set_from_resource $base0A i3wm.color11 #fda331
-set_from_resource $base0B i3wm.color10 #a1c659
-set_from_resource $base0C i3wm.color6 #76c7b7
-set_from_resource $base0D i3wm.color4 #6fb3d2
-set_from_resource $base0E i3wm.color5 #d381c3
-set_from_resource $base0F i3wm.color17 #be643c
-
-# Basic color configuration using the Base16 variables for windows and borders.
-# Property Name         Border  BG      Text    Indicator Child Border
-client.focused          $base05 $base0D $base00 $base0D $base0D
-client.focused_inactive $base01 $base01 $base05 $base03 $base01
-client.unfocused        $base01 $base00 $base05 $base01 $base01
-client.urgent           $base08 $base08 $base00 $base08 $base08
-client.placeholder      $base00 $base00 $base05 $base00 $base00
-client.background       $base07
-
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec urxvt
+bindsym $mod+Return exec urxvtc
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -186,8 +143,9 @@ bindsym $mod+r mode "resize"
 
 bindsym $mod+End mode "$mode_system"
 
-set $mode_system System (l)ock (s)uspend, (h)ibernate, (r)eboot, (S)hutdown
+set $mode_system System l(o)gout, (l)ock, (s)uspend, (h)ibernate, (r)eboot, (S)hutdown
 mode "$mode_system" {
+    bindsym o exec i3-msg exit
     bindsym l exec xscreensaver-command --lock
     bindsym s exec --no-startup-id i3exit suspend, mode "default"
     bindsym h exec --no-startup-id i3exit hibernate, mode "default"
@@ -201,47 +159,44 @@ mode "$mode_system" {
 
 # i3pystatus
 bar {
-    position bottom
+  position bottom
     separator_symbol ▒
     status_command python ~/.config/i3/botbar.py
     tray_output none
     workspace_buttons no
-
-    colors {
-        background $base00
-        separator  $base01
-        statusline $base04
-
-        # State             Border  BG      Text
-        focused_workspace   $base05 $base0D $base00
-        active_workspace    $base05 $base03 $base00
-        inactive_workspace  $base03 $base01 $base05
-        urgent_workspace    $base08 $base08 $base00
-        binding_mode        $base00 $base0A $base00
-    }
-
+  colors {
+    separator #dc322f
+    background #002b36
+    statusline #268bd2
+    focused_workspace #002b36 #002b36 #859900
+    active_workspace #002b36 #002b36 #073642
+    inactive_workspace #002b36 #002b36 #93a1a1
+    urgent_workspace #002b36 #002b36 #dc322f
+  }
 }
 
 bar {
-    position top
+  position top
     separator_symbol ▒
     status_command python ~/.config/i3/topbar.py
     strip_workspace_numbers yes
-
-    colors {
-        background $base00
-        separator  $base01
-        statusline $base04
-
-        # State             Border  BG      Text
-        focused_workspace   $base05 $base0D $base00
-        active_workspace    $base05 $base03 $base00
-        inactive_workspace  $base03 $base01 $base05
-        urgent_workspace    $base08 $base08 $base00
-        binding_mode        $base00 $base0A $base00
-    }
-
+  colors {
+    separator #dc322f
+    background #002b36
+    statusline #268bd2
+    focused_workspace #002b36 #002b36 #859900
+    active_workspace #002b36 #002b36 #073642
+    inactive_workspace #002b36 #002b36 #93a1a1
+    urgent_workspace #002b36 #002b36 #dc322f
+  }
 }
 
 # Startup programs
 exec nitrogen --restore
+exec --no-startup-id lightson 590
+
+# theme
+client.focused #859900 #859900 #fdf6e3 #6c71c4
+client.focused_inactive #073642 #073642 #eee8d5 #6c71c4
+client.unfocused #073642 #073642 #93a1a1 #586e75
+client.urgent #d33682 #d33682 #fdf6e3 #dc322f
