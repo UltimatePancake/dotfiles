@@ -1,5 +1,37 @@
-" Force bash
+" >========================================<
+" > Lasciate ogne speranza, voi ch'intrate <
+" >========================================<
+
+" ░█████░░░░░█████░
+" █░░░░░█░░░█░░░░░█
+" ░░███░░░░░░░███░░█
+" ░█░░░█░░░░░█░░░██
+" █░░░███░░░█░░░███
+" █░░████░░░█░░████
+" █░░░███░░░█░░░███
+" ░█░░░█░░░░░█████
+" ░░███░░░░░█░░░░░██
+" ░░░░░░░░░░░░░░░░░█ █
+" ░░██░░░░██░░░░░░░░███
+" ░░░████████░░░░░░░███
+" ░░░░████████░░░░░███
+" ░░░░░░████████████
+" ░░░░░░░░░░░░░░░█
+" ░░░░░░░░░░░░░░█
+" ██░░░░░░░░░░███
+" █░░░░░░░░░░█
+" █░░░░░░░░█
+" █░░░░░░█
+
+" force bash
+" I don't remember what went wrong
+" but whatever it was, my gut now tells me that whenever this isn't around
+" all hell breaks loose... something about fish
 set shell=bash\ --login
+
+" >============<
+" >>> VUNDLE <<<
+" >============<
 
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -71,101 +103,174 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
-" Syntax
+" >===============<
+" >>> QoL stuff <<<
+" >===============<
+
+" syntax
 syntax on
 colorscheme solarized
 let g:solarized_termcolors=256
 let g:solarized_termtrans=1
 
-" Syntax fix :(
+" syntax getting wonky fix
 autocmd BufEnter * :syntax sync fromstart
 
-" COLORS MUHGHFUGHAAAAAAAA
+" doesn't do what I think it does, but needed for transparency
 set background=dark
 
-" Change leader key
+" more convenient leader key
 let mapleader=","
 
-" Hide buffers instead of changing
+" hide buffers instead of changing
 set hidden
 
-" >>>EXTRAS
-set nowrap        " don't wrap lines
-set backspace=indent,eol,start " allow backspacing over everything in insert mode
-set autoindent    " always set autoindenting on
-set shiftround    " use multiple of shiftwidth when indenting with '<' and '>'
-set showmatch     " set show matching parenthesis
-set ignorecase    " ignore case when searching
-set smartcase     " ignore case if search pattern is all lowercase, case-sensitive otherwise
-set hlsearch      " highlight search terms
-set incsearch     " show search matches as you type
+" don't wrap lines
+set nowrap
 
-set history=1000         " remember more commands and search history
-set undolevels=1000      " use many muchos levels of undo
+" allow backspacing over everything in insert mode
+set backspace=indent,eol,start
+
+" always set autoindenting on
+set autoindent
+
+" use multiple of shiftwidth when indenting with '<' and '>'
+set shiftround
+
+" set show matching parenthesis
+set showmatch
+
+" ignore case when searching
+set ignorecase
+
+" ignore case if search pattern is all lowercase, case-sensitive otherwise
+set smartcase
+
+" highlight search terms
+set hlsearch
+
+" show search matches as you type
+set incsearch
+
+" remember more commands and search history
+set history=1000
+
+" use many muchos levels of undo
+set undolevels=1000
+
+" self explanatory
 set wildignore=*.swp,*.bak,*.pyc,*.class
-set title                " change the terminal's title
-set visualbell           " don't beep
-set noerrorbells         " don't beep
 
-" SOFT TABS! SOFT! WHAT PART OF THAT DO YOU NOT UNDERSTAND?
+" change the terminal's title
+set title
+
+" don't beep
+set visualbell
+
+" seriously, don't beep
+set noerrorbells
+
+" soft tabs, 4 spaces, no one likes you \t, go away
 set tabstop=4
 set softtabstop=0
 set expandtab
 set shiftwidth=4
 set smarttab
 
-" I HATE YOUR STUPID SWP FILES
+" no swp file, yes, dangerous at times, looking for better solution
 set nobackup
 set noswapfile
 
-" I HATE WHEN PEOPLE LEAVE WHITESPACE FOR NO REASON
+" highlight whitespace and tabs, used for cleanup
 set list
 set listchars=tab:>-,trail:.,extends:#,nbsp:.
 
-" PASTE MODE
+" paste mode, only used to preserve indentation
 set pastetoggle=<F2>
 
-" SO WHAT IF I ENABLE THE MOUSE?!
-"set mouse=a
-
-" SCREW YOU, I'M LAZY
+" pinnacle of laziness, saves a keypress
 nnoremap ; :
 
-" MAN MODE
+" vim, man mode
 map <up> <nop>
 map <down> <nop>
 map <left> <nop>
 map <right> <nop>
 
+" real line navigation
 nnoremap j gj
 nnoremap k gk
 
-" Easy window navigation
+" easier split navigation
 map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 
-" I SAID WRITE
+" don't remember why I have this twice
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" those times when you forget to sudoedit
 cmap w!! w !sudo tee % >/dev/null
 
-" INSTANT MODE CHANGE VISUALIZATION
+" reduce delay of mode change visualization
 set ttimeoutlen=50
 
-" >>>PLUGIN EXTRAS
+" still not used to it, but definitely convenient
+imap jk <Esc>
+
+" easier buffer switching
+nnoremap <C-q> :bprevious<CR>
+nnoremap <C-e> :bnext<CR>
+nnoremap <C-w> :bdelete<CR>
+
+" read incoming changes
+set autoread
+
+" java-tweaks because it hates everything
+let java_highlight_functions = 1
+
+" more predictable splits
+" set splitbelow
+" set splitright
+
+" line numbers, relative numbers
+set number
+set relativenumber
+
+" clear search highlights
+nnoremap <leader><space> :nohlsearch<CR>
+
+" bind F5 to clear all trailing whitespace
+nnoremap <silent> <F5> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
+
+" force no concealment of quotes, using to avoid confusion when editing JSON files
+set conceallevel=0
+
+" stuff I'm trying out
+set wildmenu
+set ruler
+
+" >===================<
+" >>> PLUGIN EXTRAS <<<
+" >===================<
+
 " NERDTREE
 map <C-n> :NERDTreeToggle<CR>
 autocmd StdinReadPre * let s:std_in=1
 let g:NERDTreeDirArrowExpandable = '+'
 let g:NERDTreeDirArrowCollapsible = '-'
 
-" NERDCOMMENTS
+" NERDCOMMENTER
 let g:NERDSpaceDelims = 1
 let g:NERDCompactSexyComs = 1
 let g:NERDDefaultAlign = 'left'
 let g:NERDTrimTrailingWhitespace = 1
 
-" SYNTASTIC PLS
+" SYNTASTIC
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
@@ -174,9 +279,6 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-
-" COLORS MUHFUCKA!
-"set t_Co=256
 
 " AIRLINE
 set laststatus=2
@@ -191,96 +293,33 @@ let g:airline#extensions#tabline#left_alt_sep = '▒'
 
 let g:airline_theme='term'
 
-" TAB SWITCHING MUHFUCKA!!
-nnoremap <C-q> :bprevious<CR>
-nnoremap <C-e> :bnext<CR>
-nnoremap <C-w> :bdelete<CR>
+set noshowmode " avoid vim showing mode, since airline handles this
 
-" GOD DAMMIT I SAID READ THE DAMN INCOMING CHANGES!
-set autoread
-
-" OLD HABITS...
-nnoremap <C-s> :write<CR>
-
-" ARE YOU SERIOUS LIFERAY?! ARE YOU SERIOUS?!?!
-"let g:syntastic_java_javac_custom_classpath_command = "ant -q get-classpath | grep echo | cut -f2- -d] | tr -d ' ' | tr ':' '\n'"
-
-" YCM and Eclim playing nice now...
+" YOUCOMPLETEME
 let g:EclimCompletionMethod = 'omnifunc'
-
-" WHAT DOES IT MEEEEEAN?!
-let g:rainbow_active = 1
-
-" GOD DAMMIT JAVA
-let java_highlight_functions = 1
-
-" WHY TWICE?!
-set noshowmode
-
-" TAGBAR
-nmap <F8> :TagbarToggle<CR>
-
-" PANE MOVEMENT
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
-
-" BETTER SPLITS
-set splitbelow
-set splitright
-
-" NUMBAAAAAHS
-set number
-set relativenumber
-
-" TAGBAR
-nmap <F8> :TagbarToggle<CR>
-
-" INDENT GUIDES
-let g:indentLine_enabled = 1
-let g:indentLine_char = '┆'
-
-" I SAID NOHL
-nnoremap <leader><space> :nohlsearch<CR>
-
-" REMOVE ALL WHITESPACE WITH F5
-nnoremap <silent> <F5> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
-
-" SCREW YOU JSON
-set conceallevel=0
-
-" I SAID PYTHON 3 DAMMIT
 let g:ycm_server_python_interpreter = "/usr/bin/python3"
-
-" NO YCM WHY
 "let g:ycm_server_keep_logfiles = 1
 "let g:ycm_server_log_level = 'debug'
 
-" still skeptical, trying this out
-imap jk <Esc>
+" RAINBOW
+let g:rainbow_active = 1
 
-" Pico launch
-"command Pico :silent ! /home/pancake/.local/bin/pico8 -run %
-
-" Colorizer
-let g:colorizer_auto_color = 1
-
-" Autosave
-let g:auto_save = 1
-
-" Indent guides
-let g:indentLine_char = '¦'
-
-" blah blah blah tags
+" TAGBAR
+nmap <F8> :TagbarToggle<CR>
 set tags=tags;/
 
-" tags + ctrlp
+" INDENTLINE
+let g:indentLine_enabled = 1
+let g:indentLine_char = '¦'
+
+" COLORIZER
+let g:colorizer_auto_color = 1
+
+" AUTOSAVE
+let g:auto_save = 1
+
+" CTRLP
 nnoremap <leader>. :CtrlPTag<CR>
 
-" trying stuff out
-set wildmenu
-"set wildmode=list:longest
-set wildmode=list:full
-
-set ruler
+" GITGUTTER
+let g:gitgutter_max_signs=9999
