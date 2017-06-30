@@ -13,3 +13,10 @@ URxvt*borderless: 1
 URxvt.urlLauncher: chromium
 URxvt.perl-ext-common: default,matcher
 URxvt.matcher.button: 1
+
+URxvt.saveLines: 500000
+
+URxvt*shading: 15
+URxvt.depth: 32
+URxvt*geometry: 100x40
+URxvt*transparent: true

@@ -14,34 +14,46 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " Plugins
-Plugin 'flazz/vim-colorschemes'
-Plugin 'scrooloose/nerdtree'
-Plugin 'tpope/vim-fugitive'
-Plugin 'scrooloose/syntastic'
-Plugin 'tpope/vim-surround'
-Plugin 'kien/ctrlp.vim'
-Plugin 'bling/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'PotatoesMaster/i3-vim-syntax'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'othree/xml.vim'
-Plugin 'andreshazard/vim-freemarker'
-Plugin 'tpope/vim-commentary'
-Plugin 'luochen1990/rainbow'
+Plugin '907th/vim-auto-save'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'bling/vim-airline'
+Plugin 'Chiel92/vim-autoformat'
+Plugin 'chrisbra/Colorizer'
+Plugin 'kien/ctrlp.vim'
+Plugin 'luochen1990/rainbow'
 Plugin 'majutsushi/tagbar'
-Plugin 'miyakogi/conoline.vim'
+Plugin 'raimondi/delimitmate'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/syntastic'
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-surround'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'yggdroot/indentline'
+
+" Plugin tryouts
+Plugin 'mhinz/vim-startify'
+Plugin 'myusuf3/numbers.vim'
+Plugin 'unblevable/quick-scope'
+Plugin 'SirVer/ultisnips'
+
+" Plugins falling out of favour
+"Plugin 'easymotion/vim-easymotion' " quick-scope teaching me to properly use f, F, t and T
+Plugin 'scrooloose/nerdtree' " learning to use more of ctrlP and tags has almost made this useless
+
+" More syntax highlighting and lang-specific functions
+Plugin 'PotatoesMaster/i3-vim-syntax'
+Plugin 'andreshazard/vim-freemarker'
 Plugin 'dag/vim-fish'
 Plugin 'rodjek/vim-puppet'
 Plugin 'hashivim/vim-vagrant'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'yuttie/comfortable-motion.vim'
+Plugin 'othree/xml.vim'
 "Plugin 'justinj/vim-pico8-syntax'
-Plugin 'SirVer/ultisnips'
-Plugin 'chrisbra/Colorizer'
 
 " Themes
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'flazz/vim-colorschemes'
+Plugin 'vim-airline/vim-airline-themes'
 
 
 " All of your Plugins must be added before the following line
@@ -61,9 +73,14 @@ filetype plugin indent on    " required
 
 " Syntax
 syntax on
+colorscheme solarized
+let g:solarized_termcolors=256
+let g:solarized_termtrans=1
+
+" Syntax fix :(
+autocmd BufEnter * :syntax sync fromstart
 
 " COLORS MUHGHFUGHAAAAAAAA
-"colorscheme badwolf
 set background=dark
 
 " Change leader key
@@ -139,7 +156,6 @@ set ttimeoutlen=50
 " NERDTREE
 map <C-n> :NERDTreeToggle<CR>
 autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 let g:NERDTreeDirArrowExpandable = '+'
 let g:NERDTreeDirArrowCollapsible = '-'
 
@@ -160,7 +176,7 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
 " COLORS MUHFUCKA!
-set t_Co=256
+"set t_Co=256
 
 " AIRLINE
 set laststatus=2
@@ -172,6 +188,8 @@ let g:airline_left_alt_sep= '▒'
 let g:airline_left_sep = '▒'
 let g:airline#extensions#tabline#left_sep = '▒'
 let g:airline#extensions#tabline#left_alt_sep = '▒'
+
+let g:airline_theme='term'
 
 " TAB SWITCHING MUHFUCKA!!
 nnoremap <C-q> :bprevious<CR>
@@ -188,7 +206,7 @@ nnoremap <C-s> :write<CR>
 "let g:syntastic_java_javac_custom_classpath_command = "ant -q get-classpath | grep echo | cut -f2- -d] | tr -d ' ' | tr ':' '\n'"
 
 " YCM and Eclim playing nice now...
-"let g:EclimCompletionMethod = 'omnifunc'
+let g:EclimCompletionMethod = 'omnifunc'
 
 " WHAT DOES IT MEEEEEAN?!
 let g:rainbow_active = 1
@@ -223,9 +241,6 @@ nmap <F8> :TagbarToggle<CR>
 let g:indentLine_enabled = 1
 let g:indentLine_char = '┆'
 
-" CONOLINE
-let g:conoline_auto_enable = 1
-
 " I SAID NOHL
 nnoremap <leader><space> :nohlsearch<CR>
 
@@ -250,3 +265,22 @@ imap jk <Esc>
 
 " Colorizer
 let g:colorizer_auto_color = 1
+
+" Autosave
+let g:auto_save = 1
+
+" Indent guides
+let g:indentLine_char = '¦'
+
+" blah blah blah tags
+set tags=tags;/
+
+" tags + ctrlp
+nnoremap <leader>. :CtrlPTag<CR>
+
+" trying stuff out
+set wildmenu
+"set wildmode=list:longest
+set wildmode=list:full
+
+set ruler

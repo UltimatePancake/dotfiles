@@ -10,7 +10,7 @@ rofi.sidebar-mode: true
 
 rofi.location: 8
 rofi.width: 16
-rofi.lines: 48
+rofi.lines: 58
 rofi.line-margin: 1
 
 rofi.disable-history: false
