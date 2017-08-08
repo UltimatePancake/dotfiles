@@ -62,7 +62,6 @@ Plug 'flazz/vim-colorschemes'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'lifepillar/vim-solarized8'
 
 " Because sometimes you just need to know
 " remember to `ctags -R .` beforehand
@@ -98,6 +97,7 @@ Plug 'Shougo/vimfiler.vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " !!! deoplete completers !!!
 Plug 'zchee/deoplete-jedi'
+Plug 'carlitux/deoplete-ternjs'
 
 call plug#end()
 
@@ -160,6 +160,16 @@ let g:solarized_termtrans=1
 " https://github.com/Shougo/vimfiler.vim
 nmap <F3> :VimFiler -toggle<CR>
 
+" deoplete ternjs
+"
+let g:tern_request_timeout = 1
+let g:tern_show_signature_in_pum = '0'  " This do disable full signature type on autocomplete
+
+let g:tern#filetypes = [ 'htmldjango' ]
+
+let g:tern#command = ['tern']
+let g:tern#arguments = ['--persistent']
+
 " >------><------<
 " >=> SETTINGS <=<
 " >--<|>----<|>--<
@@ -200,7 +210,15 @@ set expandtab
 set shiftwidth=4
 set smarttab
 
+set foldmethod=indent
+set foldnestmax=10
+set nofoldenable
+set foldlevel=2
+
 " <>....v....<>
 " <<< FIXES >>>
 " <>''''^''''<>
 "set t_Co=256
+augroup syntaxfix
+  autocmd BufEnter * :syntax sync fromstart
+augroup END
