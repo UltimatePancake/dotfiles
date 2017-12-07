@@ -209,7 +209,7 @@ let delimitMate_expand_cr = 1
 
 " vimfiler
 " https://github.com/Shougo/vimfiler.vim
-nmap <F3> :VimFiler -toggle<CR>
+nmap <F3> :VimFilerExplorer -toggle<CR>
 
 " deoplete ternjs
 " https://github.com/carlitux/deoplete-ternjs
@@ -253,7 +253,7 @@ autocmd FileType scss set iskeyword+=-
 
 " autoformat
 " https://github.com/Chiel92/vim-autoformat
-noremap <F3> :Autoformat<CR>
+noremap <F4> :Autoformat<CR>
 
 " >------><------<
 " >=> SETTINGS <=<
