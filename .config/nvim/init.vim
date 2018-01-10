@@ -1,6 +1,9 @@
 scriptencoding utf-8
+set shell=bash\ --login
 
 " +================================================================================+
+" |████████████████████████████████████████████████████████████████████████████████|
+" |██████████████████> Lasciate ogne speranza, voi ch'intrate <████████████████████|
 " |████████████████████████████████████████████████████████████████████████████████|
 " |████████████████████▓▓▓█████████████████████████████████████████████████████████|
 " |████████████████▓╣╣╣╣╣╣╣╣╣╣╣╣▓▓▓████████████████████████████████████████████████|
@@ -35,7 +38,7 @@ scriptencoding utf-8
 " |█████████████████████████████████████████████▓▓@▓█████▓▓▓▓▓▓▓▓╬▒▒W@▓▓▓██████████|
 " |████████████████████████████████████████████████████████▓▓▓▄▓▓▄▄▄@▓▓████████████|
 " |████████████████████████████████████████████████████████████████████████████████|
-" |████>Make sure you use single quotes████████████████████> DOOT DOOT <███████████|
+" |████> Make sure you use single quotes <█████████████████> DOOT DOOT <███████████|
 " |████████████████████████████████████████████████████████████████████████████████|
 " +================================================================================+
 
@@ -55,20 +58,27 @@ Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 
 " A good ten-thousand times a day
-Plug 'kien/ctrlp.vim'
+" Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 
 " Vim *does* look boring
 Plug 'flazz/vim-colorschemes'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'ryanoasis/vim-devicons'
+Plug 'beigebrucewayne/hacked_ayu.vim'
+Plug 'beigebrucewayne/Turtles'
+Plug 'ajmwagar/vim-deus'
+Plug 'kudabux/vim-srcery-drk'
+Plug 'ayu-theme/ayu-vim'
 
 " Because sometimes you just need to know
 " remember to `ctags -R .` beforehand
 Plug 'majutsushi/tagbar'
 
 " Because I can't imagine anyone
-" actually memorizing all this
+" actually memorizing every convention rule
 Plug 'w0rp/ale'
 
 " Commenting is annoying
@@ -86,18 +96,58 @@ Plug 'unblevable/quick-scope'
 " Autocompletion without tab just feels wrong
 Plug 'ervandew/supertab'
 
-" Because Shogo's stuff requires unite
+" Do I actually need this?
+Plug 'Raimondi/delimitMate'
+
+" Because Shougo's stuff requires unite
 Plug 'Shougo/unite.vim'
 
 " Sometimes it helps to see the tree
-"Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'Shougo/vimfiler.vim'
+
+" I need to stop doing this manually
+Plug 'Chiel92/vim-autoformat'
+
+" I forget what I change
+Plug 'airblade/vim-gitgutter'
 
 " IDEs tend to spoil people, including me :(
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " !!! deoplete completers !!!
 Plug 'zchee/deoplete-jedi'
 Plug 'carlitux/deoplete-ternjs'
+Plug 'mhartington/nvim-typescript'
+" Plug 'slashmili/alchemist.vim'
+" will you ever leave me alone?
+Plug 'artur-shaik/vim-javacomplete2'
+
+" Emmet, cuz I have to learn someday
+Plug 'mattn/emmet-vim'
+
+" Fine, let's actually try to use snippets
+Plug 'SirVer/ultisnips'
+
+" ... and then JS attacked...
+" Plug 'leafgarland/typescript-vim'
+Plug 'pangloss/vim-javascript'
+Plug 'othree/javascript-libraries-syntax.vim'
+" Plug 'burnettk/vim-angular'
+Plug 'KabbAmine/gulp-vim'
+
+" Extra syntax
+Plug 'dag/vim-fish'
+Plug 'lepture/vim-velocity'
+" Plug 'elixir-editors/vim-elixir'
+Plug 'hail2u/vim-css3-syntax'
+Plug 'cakebaker/scss-syntax.vim'
+Plug 'andreshazard/vim-freemarker'
+
+" TELL ME
+Plug 'wakatime/vim-wakatime'
+
+" shits and giggles...
+Plug 'aurieh/discord.nvim', { 'do': ':UpdateRemotePlugins' }
+
 
 call plug#end()
 
@@ -108,17 +158,24 @@ call plug#end()
 " rainbow_parentheses.vim
 " https://github.com/kien/rainbow_parentheses.vim
 augroup vim_rainbow
-  au VimEnter * RainbowParenthesesToggle
-  au Syntax * RainbowParenthesesLoadRound
-  au Syntax * RainbowParenthesesLoadSquare
-  au Syntax * RainbowParenthesesLoadBraces
+    au VimEnter * RainbowParenthesesToggle
+    au Syntax * RainbowParenthesesLoadRound
+    au Syntax * RainbowParenthesesLoadSquare
+    au Syntax * RainbowParenthesesLoadBraces
 augroup END
 
 " vim-airline
 " https://github.com/vim-airline/vim-airline
+set laststatus=2
 let g:airline#extensions#tabline#enabled=1
 let g:airline_powerline_fonts=1
-" let g:airline_theme='base16_solarized'
+let g:airline_theme='turtles'
+let g:airline_right_alt_sep = '▒'
+let g:airline_right_sep = '▒'
+let g:airline_left_alt_sep= '▒'
+let g:airline_left_sep = '▒'
+let g:airline#extensions#tabline#left_sep = '▒'
+let g:airline#extensions#tabline#left_alt_sep = '▒'
 
 " tagbar
 " https://github.com/majutsushi/tagbar
@@ -148,27 +205,82 @@ let g:ale_echo_msg_format = '[%linter%] [%severity%] %s'
 " https://github.com/Shougo/deoplete.nvim
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#auto_completion_start_length = 0
+" call deoplete#custom#set('jedi', 'debug_enabled', 1)
+" call deoplete#enable_logging('DEBUG', '/tmp/deoplete.log')
 
-call deoplete#custom#set('jedi', 'debug_enabled', 1)
-call deoplete#enable_logging('DEBUG', '/tmp/deoplete.log')
-
-" vim-solarized8
-" https://github.com/lifepillar/vim-solarized8
-let g:solarized_termtrans=1
+" delimitmate
+" https://github.com/Raimondi/delimitMate
+let delimitMate_expand_cr = 1
 
 " vimfiler
 " https://github.com/Shougo/vimfiler.vim
-nmap <F3> :VimFiler -toggle<CR>
+nmap <F3> :VimFilerExplorer -toggle<CR>
 
 " deoplete ternjs
-"
+" https://github.com/carlitux/deoplete-ternjs
 let g:tern_request_timeout = 1
-let g:tern_show_signature_in_pum = '0'  " This do disable full signature type on autocomplete
-
-let g:tern#filetypes = [ 'htmldjango' ]
-
+let g:tern_show_signature_in_pum = '0'  " This disables full signature type on autocomplete
+" let g:tern#filetypes = [ 'htmldjango' ]
 let g:tern#command = ['tern']
 let g:tern#arguments = ['--persistent']
+
+" ctrlp
+" https://github.com/kien/ctrlp.vim
+let g:ctrlp_max_files=0
+let g:ctrlp_match_window = 'bottom,order:ttb'
+let g:ctrlp_switch_buffer = 0
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+nnoremap <leader>. :CtrlPMixed<CR>
+
+" ultisnips
+" https://github.com/SirVer/ultisnips
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" emmet
+" https://github.com/mattn/emmet-vim
+"imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
+
+" css3-syntax
+" https://github.com/hail2u/vim-css3-syntax
+augroup VimCSS3Syntax
+    autocmd!
+
+    autocmd FileType css setlocal iskeyword+=-
+augroup END
+
+" scss-syntax
+" https://github.com/cakebaker/scss-syntax.vim
+"au BufRead,BufNewFile *.scss set filetype=scss.css
+autocmd FileType scss set iskeyword+=-
+
+" autoformat
+" https://github.com/Chiel92/vim-autoformat
+noremap <F4> :Autoformat<CR>
+
+" devicons
+" https://github.com/ryanoasis/vim-devicons
+let g:airline_powerline_fonts = 1
+let g:webdevicons_enable_vimfiler = 1
+
+" javacomplete2
+" https://github.com/artur-shaik/vim-javacomplete2
+augroup javacompletefix
+    autocmd FileType java setlocal omnifunc=javacomplete#Complete
+augroup END
+
+let g:JavaComplete_ClasspathGenerationOrder = ['Gradle', 'Maven', 'Eclipse']
+
+" <>....v....<>
+" <<< FIXES >>>
+" <>''''^''''<>
+set t_Co=256
+augroup syntaxfix
+    autocmd BufEnter * :syntax sync fromstart
+augroup END
+
 
 " >------><------<
 " >=> SETTINGS <=<
@@ -176,7 +288,18 @@ let g:tern#arguments = ['--persistent']
 set number
 set relativenumber
 
+set termguicolors
+set background=dark
+
 let g:mapleader=','
+
+nnoremap j gj
+nnoremap k gk
+
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
 
 set showmatch
 set ignorecase
@@ -190,35 +313,56 @@ set list
 set listchars=tab:>\ ,trail:.,extends:#,nbsp:.
 set conceallevel=0
 
-nnoremap ; :
+" nnoremap ; :
 imap jk <Esc>
 
 nnoremap <leader><space> :nohlsearch<CR>
 set pastetoggle=<F2>
 
+" MAN MODE
 map <up> <nop>
 map <down> <nop>
 map <left> <nop>
 map <right> <nop>
+" MAN MODE
 
-" set background=dark
-" colorscheme solarized8_dark
+colorscheme turtles
 
 set tabstop=4
-set softtabstop=0
+set softtabstop=4
 set expandtab
 set shiftwidth=4
 set smarttab
+
+set autoindent
+"set textwidth=80
 
 set foldmethod=indent
 set foldnestmax=10
 set nofoldenable
 set foldlevel=2
 
-" <>....v....<>
-" <<< FIXES >>>
-" <>''''^''''<>
-"set t_Co=256
-augroup syntaxfix
-  autocmd BufEnter * :syntax sync fromstart
-augroup END
+nnoremap <Space> za
+
+set noautochdir
+set nowrap
+set hidden
+
+cmap w!! %!sudo tee > /dev/null %
+
+nnoremap <A-j> :m+<CR>==
+nnoremap <A-k> :m-2<CR>==
+nnoremap <A-h> <<
+nnoremap <A-l> >>
+vnoremap <A-j> :m'>+<CR>gv=gv
+vnoremap <A-k> :m-2<CR>gv=gv
+vnoremap <A-h> <gv
+vnoremap <A-l> >gv
+
+vmap <silent> L :bn!<cr>
+nmap <silent> L :bn!<cr>
+vmap <silent> H :bp!<cr>
+nmap <silent> H :bp!<cr>
+
+set cursorline
+hi CursorLine term=bold cterm=bold guibg=Grey40
