@@ -236,9 +236,8 @@ augroup END
 
 " scss-syntax
 " https://github.com/cakebaker/scss-syntax.vim
-"au BufRead,BufNewFile *.scss set filetype=scss.css
-
 autocmd FileType scss set iskeyword+=-
+
 " autoformat
 " https://github.com/Chiel92/vim-autoformat
 noremap <F4> :Autoformat<CR>
