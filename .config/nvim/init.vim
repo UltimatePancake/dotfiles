@@ -58,20 +58,16 @@ Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 
 " A good ten-thousand times a day
-" Plug 'kien/ctrlp.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 
 " Vim *does* look boring
-Plug 'flazz/vim-colorschemes'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'ryanoasis/vim-devicons'
-Plug 'beigebrucewayne/hacked_ayu.vim'
-Plug 'beigebrucewayne/Turtles'
-Plug 'ajmwagar/vim-deus'
-Plug 'kudabux/vim-srcery-drk'
 Plug 'ayu-theme/ayu-vim'
+Plug 'Yggdroot/indentLine'
+Plug 'miyakogi/seiya.vim'
 
 " Because sometimes you just need to know
 " remember to `ctags -R .` beforehand
@@ -84,7 +80,7 @@ Plug 'w0rp/ale'
 " Commenting is annoying
 Plug 'scrooloose/nerdcommenter'
 
-" Splash screens can sometiems be useful
+" Splash screens can sometimes be useful
 Plug 'mhinz/vim-startify'
 
 " It just makes sense
@@ -112,41 +108,30 @@ Plug 'Chiel92/vim-autoformat'
 Plug 'airblade/vim-gitgutter'
 
 " IDEs tend to spoil people, including me :(
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
 " !!! deoplete completers !!!
-Plug 'zchee/deoplete-jedi'
-Plug 'carlitux/deoplete-ternjs'
-Plug 'mhartington/nvim-typescript'
-" Plug 'slashmili/alchemist.vim'
-" will you ever leave me alone?
-Plug 'artur-shaik/vim-javacomplete2'
+Plug 'zchee/deoplete-jedi', {'for': 'python'}
+Plug 'carlitux/deoplete-ternjs', {'do': 'npm install -g tern'}
 
 " Emmet, cuz I have to learn someday
-Plug 'mattn/emmet-vim'
+Plug 'mattn/emmet-vim', {'for': ['html', 'xml', 'jsp', 'freemarker']}
 
 " Fine, let's actually try to use snippets
 Plug 'SirVer/ultisnips'
 
-" ... and then JS attacked...
-" Plug 'leafgarland/typescript-vim'
-Plug 'pangloss/vim-javascript'
-Plug 'othree/javascript-libraries-syntax.vim'
-" Plug 'burnettk/vim-angular'
-Plug 'KabbAmine/gulp-vim'
-
 " Extra syntax
-Plug 'dag/vim-fish'
-Plug 'lepture/vim-velocity'
-" Plug 'elixir-editors/vim-elixir'
-Plug 'hail2u/vim-css3-syntax'
-Plug 'cakebaker/scss-syntax.vim'
-Plug 'andreshazard/vim-freemarker'
+Plug 'dag/vim-fish', {'for': 'fish'}
+Plug 'lepture/vim-velocity', {'for': 'velocity'}
+Plug 'elixir-editors/vim-elixir', {'for': 'elixir'}
+Plug 'hail2u/vim-css3-syntax', {'for': 'css'}
+Plug 'cakebaker/scss-syntax.vim', {'for': 'css'}
+Plug 'andreshazard/vim-freemarker', {'for': 'freemarker'}
 
 " TELL ME
-Plug 'wakatime/vim-wakatime'
+"Plug 'wakatime/vim-wakatime'
 
 " shits and giggles...
-Plug 'aurieh/discord.nvim', { 'do': ':UpdateRemotePlugins' }
+"Plug 'aurieh/discord.nvim', { 'do': ':UpdateRemotePlugins' }
 
 
 call plug#end()
@@ -169,13 +154,13 @@ augroup END
 set laststatus=2
 let g:airline#extensions#tabline#enabled=1
 let g:airline_powerline_fonts=1
-let g:airline_theme='turtles'
-let g:airline_right_alt_sep = '▒'
-let g:airline_right_sep = '▒'
-let g:airline_left_alt_sep= '▒'
-let g:airline_left_sep = '▒'
-let g:airline#extensions#tabline#left_sep = '▒'
-let g:airline#extensions#tabline#left_alt_sep = '▒'
+let g:airline_theme='ayu_mirage'
+let g:airline_right_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_left_alt_sep= ''
+let g:airline_left_sep = ''
+let g:airline#extensions#tabline#left_sep = ''
+let g:airline#extensions#tabline#left_alt_sep = ''
 
 " tagbar
 " https://github.com/majutsushi/tagbar
@@ -205,8 +190,6 @@ let g:ale_echo_msg_format = '[%linter%] [%severity%] %s'
 " https://github.com/Shougo/deoplete.nvim
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#auto_completion_start_length = 0
-" call deoplete#custom#set('jedi', 'debug_enabled', 1)
-" call deoplete#enable_logging('DEBUG', '/tmp/deoplete.log')
 
 " delimitmate
 " https://github.com/Raimondi/delimitMate
@@ -220,7 +203,6 @@ nmap <F3> :VimFilerExplorer -toggle<CR>
 " https://github.com/carlitux/deoplete-ternjs
 let g:tern_request_timeout = 1
 let g:tern_show_signature_in_pum = '0'  " This disables full signature type on autocomplete
-" let g:tern#filetypes = [ 'htmldjango' ]
 let g:tern#command = ['tern']
 let g:tern#arguments = ['--persistent']
 
@@ -238,6 +220,7 @@ nnoremap <leader>. :CtrlPMixed<CR>
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsUsePythonVersion = 3
 
 " emmet
 " https://github.com/mattn/emmet-vim
@@ -254,8 +237,8 @@ augroup END
 " scss-syntax
 " https://github.com/cakebaker/scss-syntax.vim
 "au BufRead,BufNewFile *.scss set filetype=scss.css
-autocmd FileType scss set iskeyword+=-
 
+autocmd FileType scss set iskeyword+=-
 " autoformat
 " https://github.com/Chiel92/vim-autoformat
 noremap <F4> :Autoformat<CR>
@@ -273,6 +256,19 @@ augroup END
 
 let g:JavaComplete_ClasspathGenerationOrder = ['Gradle', 'Maven', 'Eclipse']
 
+" indentLine
+" https://github.com/Yggdroot/indentLine
+let g:indentLine_char = '┆'
+let g:indentLine_first_char = '┆'
+let g:indentLine_showFirstIndentLevel = 1
+let g:indentLine_setColors = 0
+
+" seiya
+" https://github.com/miyakogi/seiya.vim
+let g:seiya_auto_enable=1
+let g:seiya_target_groups = has('nvim') ? ['guibg'] : ['ctermbg']
+
+
 " <>....v....<>
 " <<< FIXES >>>
 " <>''''^''''<>
@@ -288,8 +284,13 @@ augroup END
 set number
 set relativenumber
 
+" COLOR FIXES
 set termguicolors
+" options are light, mirage or dark
+let ayucolor="mirage"
 set background=dark
+colorscheme ayu
+" COLOR FIXES
 
 let g:mapleader=','
 
@@ -313,7 +314,7 @@ set list
 set listchars=tab:>\ ,trail:.,extends:#,nbsp:.
 set conceallevel=0
 
-" nnoremap ; :
+nnoremap ; :
 imap jk <Esc>
 
 nnoremap <leader><space> :nohlsearch<CR>
@@ -325,8 +326,6 @@ map <down> <nop>
 map <left> <nop>
 map <right> <nop>
 " MAN MODE
-
-colorscheme turtles
 
 set tabstop=4
 set softtabstop=4
@@ -365,4 +364,3 @@ vmap <silent> H :bp!<cr>
 nmap <silent> H :bp!<cr>
 
 set cursorline
-hi CursorLine term=bold cterm=bold guibg=Grey40
